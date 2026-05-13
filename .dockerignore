@@ -1,0 +1,25 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+.env
+gradio_cached_examples/
+flagged/
+*.log
+.git/
+.github/
+.claude/
+docs/
+# Source MIDI/MSCZ/FLAC — regenerovatelné z download.py, ne nutné v image
+tests/fixtures/mutopia/**/*.midi
+tests/fixtures/real/**/*.flac
+tests/fixtures/real/**/*.mp3
+tests/fixtures/real/**/*.mid
+tests/fixtures/real/**/*.midi
+tests/fixtures/real/_source/
+*.md
+# Velké WAV soubory necháváme v image — Examples tab je potřebuje
