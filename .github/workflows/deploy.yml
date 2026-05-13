@@ -7,11 +7,17 @@ name: Build + Deploy noty
 # Auth do Azure: OIDC federated identity (žádné secrety se neukládají do GitHubu).
 # Před prvním runem nakonfiguruj OIDC v Azure (viz docs/TERRAFORM.md).
 
+# Auto-trigger vypnut do doby, než nakonfigurujeme OIDC federated credentials
+# (viz docs/TERRAFORM.md sekce "OIDC federated identity setup"). Workflow lze
+# spustit ručně přes "Run workflow" v GitHub UI (workflow_dispatch).
+#
+# Pro znovuaktivaci auto-deployu: odkomentuj push/pull_request bloky.
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
+  # push:
+  #   branches: [main]
+  # pull_request:
+  #   branches: [main]
 
 # Globální permissions pro OIDC token (potřebné pro azure/login)
 permissions:
