@@ -435,8 +435,21 @@ def _detect_time_signature_full(
                 other = float(grouped[:, 1:].mean()) if meter > 1 else 0.0
                 contrasts[label] = downbeat / max(other, 1e-6)
 
-        # Vyber nejlepší kandidát, ale s preferencí 4/4 pokud jsou contraste blízko.
+        # Vyber nejlepší kandidát. Aplikujeme tie-breaking proti menším metrům:
+        # - 2/4 statisticky "vyhraje" nad 4/4 (oba downbeats 1+3 v 4/4 jsou taky
+        #   downbeats v 2/4). Přijmeme 2/4 jen když contrast > 1.4× contrast 4/4.
+        # - Podobně 6/8 vs 3/4.
+        # Pokud rozdíl není přesvědčivý, padáme zpět na 4/4 (resp. 3/4) — častější
+        # takt v klasické hudbě.
         best_label = max(contrasts, key=contrasts.get) if contrasts else "4/4"
+        if best_label == "2/4" and "4/4" in contrasts:
+            if contrasts["2/4"] < contrasts["4/4"] * 1.4:
+                best_label = "4/4"
+        if best_label == "6/8" and "3/4" in contrasts:
+            # 6/8 vs 3/4 je těžší rozlišit — 6/8 = dva 3-beat trsy, struktura podobná.
+            # Mírnější threshold (1.15×) než pro 2/4 vs 4/4.
+            if contrasts["6/8"] < contrasts["3/4"] * 1.15:
+                best_label = "3/4"
         return best_label, {k: round(v, 3) for k, v in contrasts.items()}
     except Exception as exc:
         logger.warning("Time signature detection selhala: %s, default 4/4", exc)
