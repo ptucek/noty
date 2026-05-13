@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import base64
 import json
 import logging
 import tempfile
@@ -140,6 +141,75 @@ def discover_fixtures() -> list[FixtureExample]:
     return _load_synthetic_fixtures() + _load_mutopia_fixtures()
 
 
+OSMD_CDN_URL = "https://unpkg.com/opensheetmusicdisplay@1.9.0/build/opensheetmusicdisplay.min.js"
+
+OSMD_EMPTY_HTML = (
+    '<div style="padding: 1em; color: #888; font-style: italic;">'
+    "Náhled OSMD se zobrazí po transkripci."
+    "</div>"
+)
+
+
+def _build_osmd_html(musicxml_path: Path) -> str:
+    """Vrátí HTML, ve kterém OSMD v prohlížeči vykreslí MusicXML soubor.
+
+    MusicXML se base64-enkóduje a v JS dekóduje přes ``atob`` — vyhneme se tak
+    escape problémům s backticky / ``${`` v template literálu.
+    """
+    try:
+        xml_text = musicxml_path.read_text(encoding="utf-8")
+    except OSError as exc:
+        logger.warning("OSMD: nepodařilo se přečíst MusicXML (%s): %s", musicxml_path, exc)
+        return (
+            '<div style="padding: 1em; color: #c00;">'
+            "OSMD náhled není dostupný — MusicXML soubor nelze přečíst."
+            "</div>"
+        )
+
+    xml_b64 = base64.b64encode(xml_text.encode("utf-8")).decode("ascii")
+    # Unikátní ID pro případ, že by se HTML znovu vložilo do stejné stránky.
+    container_id = f"osmd-container-{abs(hash(xml_b64)) % (10**8)}"
+
+    return f"""
+<div id="{container_id}" style="width: 100%; height: 600px; overflow: auto; border: 1px solid #ddd; background: #fff;"></div>
+<script src="{OSMD_CDN_URL}"></script>
+<script>
+(function() {{
+  function renderOSMD() {{
+    if (typeof opensheetmusicdisplay === "undefined") {{
+      setTimeout(renderOSMD, 100);
+      return;
+    }}
+    var container = document.getElementById("{container_id}");
+    if (!container) {{ return; }}
+    try {{
+      // Dekóduj base64 → UTF-8 string (atob vrátí latin1, převedeme).
+      var b64 = "{xml_b64}";
+      var binary = atob(b64);
+      var bytes = new Uint8Array(binary.length);
+      for (var i = 0; i < binary.length; i++) {{ bytes[i] = binary.charCodeAt(i); }}
+      var xml = new TextDecoder("utf-8").decode(bytes);
+      var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay(container, {{
+        drawTitle: false,
+        drawComposer: false,
+        drawSubtitle: false,
+        drawPartNames: false,
+        backend: "svg",
+        autoResize: true,
+      }});
+      osmd.load(xml).then(function() {{ osmd.render(); }}).catch(function(err) {{
+        container.innerHTML = '<div style="padding:1em;color:#c00;">OSMD render selhal: ' + err + '</div>';
+      }});
+    }} catch (e) {{
+      container.innerHTML = '<div style="padding:1em;color:#c00;">OSMD chyba: ' + e + '</div>';
+    }}
+  }}
+  renderOSMD();
+}})();
+</script>
+""".strip()
+
+
 def run_pipeline(
     audio_input: str | None,
     category_label: str,
@@ -185,6 +255,7 @@ def run_pipeline(
     rendered = render_musicxml(musicxml_path, workdir)
 
     preview = rendered.get("png")
+    osmd_html = _build_osmd_html(musicxml_path)
     return (
         str(musicxml_path),
         str(rendered.get("mid")) if "mid" in rendered else None,
@@ -192,6 +263,7 @@ def run_pipeline(
         str(rendered.get("png")) if "png" in rendered else None,
         str(rendered.get("svg")) if "svg" in rendered else None,
         str(preview) if preview else None,
+        osmd_html,
     )
 
 
@@ -257,6 +329,10 @@ def _build_transcribe_tab(fixtures: list[FixtureExample]) -> None:
             run_btn = gr.Button("Transkribovat", variant="primary")
         with gr.Column(scale=1):
             preview = gr.Image(label="Náhled (PNG první strany výstupu)", type="filepath")
+            osmd_preview = gr.HTML(
+                label="Náhled v prohlížeči (OSMD)",
+                value=OSMD_EMPTY_HTML,
+            )
             with gr.Group():
                 gr.Markdown("### Soubory ke stažení")
                 f_xml = gr.File(label="MusicXML")
@@ -268,7 +344,7 @@ def _build_transcribe_tab(fixtures: list[FixtureExample]) -> None:
     run_btn.click(
         fn=run_pipeline,
         inputs=[audio, category, tempo_input, key_input, timesig_input],
-        outputs=[f_xml, f_mid, f_pdf, f_png, f_svg, preview],
+        outputs=[f_xml, f_mid, f_pdf, f_png, f_svg, preview, osmd_preview],
     )
 
     if fixtures:
