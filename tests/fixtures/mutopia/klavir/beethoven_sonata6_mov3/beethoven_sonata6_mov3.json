@@ -1,0 +1,19 @@
+{
+  "slug": "beethoven_sonata6_mov3",
+  "category": "klavir",
+  "title": "Sonata No. 6 (3rd Movement: Presto)",
+  "composer": "L. V. Beethoven (1770–1827)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=994",
+  "mid_url": "https://www.mutopiaproject.org/ftp/BeethovenLv/O10/lvb_sonate_10no2_3/lvb_sonate_10no2_3.mid",
+  "bpm": 148.0,
+  "time_signature": "2/4",
+  "key": "F major",
+  "expected_notes_count": 56,
+  "duration_s": 9.485986394557823,
+  "measures_kept": 8,
+  "measures_total": 149,
+  "musicxml": "klavir/beethoven_sonata6_mov3/beethoven_sonata6_mov3.musicxml",
+  "wav": "klavir/beethoven_sonata6_mov3/beethoven_sonata6_mov3.wav",
+  "json_meta": "klavir/beethoven_sonata6_mov3/beethoven_sonata6_mov3.json"
+}

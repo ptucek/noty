@@ -1,0 +1,19 @@
+{
+  "slug": "schumann_kinderszenen_1",
+  "category": "klavir",
+  "title": "Kinderscenen - Von fremden Ländern und Menschen",
+  "composer": "R. Schumann (1810–1856)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=354",
+  "mid_url": "https://www.mutopiaproject.org/ftp/SchumannR/O15/SchumannOp15No01/SchumannOp15No01.mid",
+  "bpm": 72.0,
+  "time_signature": "2/4",
+  "key": "G major",
+  "expected_notes_count": 65,
+  "duration_s": 16.332993197278913,
+  "measures_kept": 8,
+  "measures_total": 22,
+  "musicxml": "klavir/schumann_kinderszenen_1/schumann_kinderszenen_1.musicxml",
+  "wav": "klavir/schumann_kinderszenen_1/schumann_kinderszenen_1.wav",
+  "json_meta": "klavir/schumann_kinderszenen_1/schumann_kinderszenen_1.json"
+}

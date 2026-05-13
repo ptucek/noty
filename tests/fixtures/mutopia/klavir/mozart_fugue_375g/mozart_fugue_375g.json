@@ -1,0 +1,19 @@
+{
+  "slug": "mozart_fugue_375g",
+  "category": "klavir",
+  "title": "Fugue fragment Anh. 41 (375g)",
+  "composer": "W. A. Mozart (1756–1791)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=447",
+  "mid_url": "https://www.mutopiaproject.org/ftp/MozartWA/Anh41/k375g/k375g.mid",
+  "bpm": 110.00000000000001,
+  "time_signature": "4/4",
+  "key": "E minor",
+  "expected_notes_count": 59,
+  "duration_s": 20.453990929705217,
+  "measures_kept": 8,
+  "measures_total": 27,
+  "musicxml": "klavir/mozart_fugue_375g/mozart_fugue_375g.musicxml",
+  "wav": "klavir/mozart_fugue_375g/mozart_fugue_375g.wav",
+  "json_meta": "klavir/mozart_fugue_375g/mozart_fugue_375g.json"
+}

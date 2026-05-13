@@ -1,0 +1,19 @@
+{
+  "slug": "beethoven_fur_elise",
+  "category": "klavir",
+  "title": "Für Elise",
+  "composer": "L. V. Beethoven (1770–1827)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=931",
+  "mid_url": "https://www.mutopiaproject.org/ftp/BeethovenLv/WoO59/fur_Elise_WoO59/fur_Elise_WoO59.mid",
+  "bpm": 72.0,
+  "time_signature": "3/8",
+  "key": "A minor",
+  "expected_notes_count": 53,
+  "duration_s": 13.0,
+  "measures_kept": 8,
+  "measures_total": 105,
+  "musicxml": "klavir/beethoven_fur_elise/beethoven_fur_elise.musicxml",
+  "wav": "klavir/beethoven_fur_elise/beethoven_fur_elise.wav",
+  "json_meta": "klavir/beethoven_fur_elise/beethoven_fur_elise.json"
+}

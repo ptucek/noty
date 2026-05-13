@@ -1,0 +1,44 @@
+[project]
+name = "noty"
+version = "0.1.0"
+description = "Webová aplikace pro transkripci audio do notového zápisu"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "gradio>=5.0,<7",
+    "basic-pitch[onnx]>=0.4.0",
+    "demucs>=4.0.1",
+    "music21>=9.1",
+    "librosa>=0.10.2",
+    "soundfile>=0.12",
+    "numpy>=1.26,<2.0",
+    "torch>=2.2",
+    "torchaudio>=2.2",
+    "audio-separator>=0.30.2",
+    "anthropic>=0.101.0",
+    "pydantic>=2.13.4",
+    "azure-identity>=1.25.3",
+    "madmom>=0.16.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "ruff>=0.6",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/transcribe_app"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.uv.extra-build-dependencies]
+madmom = ["cython", "numpy"]

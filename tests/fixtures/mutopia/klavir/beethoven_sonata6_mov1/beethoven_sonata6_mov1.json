@@ -1,0 +1,19 @@
+{
+  "slug": "beethoven_sonata6_mov1",
+  "category": "klavir",
+  "title": "Sonata No. 6 (1st Movement: Allegro)",
+  "composer": "L. V. Beethoven (1770–1827)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=992",
+  "mid_url": "https://www.mutopiaproject.org/ftp/BeethovenLv/O10/lvb_sonate_10no2_1/lvb_sonate_10no2_1.mid",
+  "bpm": 96.0,
+  "time_signature": "2/4",
+  "key": "F major",
+  "expected_notes_count": 37,
+  "duration_s": 13.0,
+  "measures_kept": 8,
+  "measures_total": 204,
+  "musicxml": "klavir/beethoven_sonata6_mov1/beethoven_sonata6_mov1.musicxml",
+  "wav": "klavir/beethoven_sonata6_mov1/beethoven_sonata6_mov1.wav",
+  "json_meta": "klavir/beethoven_sonata6_mov1/beethoven_sonata6_mov1.json"
+}

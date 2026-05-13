@@ -1,0 +1,19 @@
+{
+  "slug": "beethoven_sonata1_mov1",
+  "category": "klavir",
+  "title": "Sonata No. 1 (1st Movement: Allegro)",
+  "composer": "L. V. Beethoven (1770–1827)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1211",
+  "mid_url": "https://www.mutopiaproject.org/ftp/BeethovenLv/O2/LVB_Sonate_02no1_1/LVB_Sonate_02no1_1.mid",
+  "bpm": 190.0,
+  "time_signature": "4/4",
+  "key": "F minor",
+  "expected_notes_count": 51,
+  "duration_s": 13.10498866213152,
+  "measures_kept": 8,
+  "measures_total": 152,
+  "musicxml": "klavir/beethoven_sonata1_mov1/beethoven_sonata1_mov1.musicxml",
+  "wav": "klavir/beethoven_sonata1_mov1/beethoven_sonata1_mov1.wav",
+  "json_meta": "klavir/beethoven_sonata1_mov1/beethoven_sonata1_mov1.json"
+}

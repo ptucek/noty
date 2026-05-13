@@ -1,0 +1,19 @@
+{
+  "slug": "bach_air_g_string",
+  "category": "monofonni",
+  "title": "Air ('on the G string')",
+  "composer": "J. S. Bach (1685–1750)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1534",
+  "mid_url": "https://www.mutopiaproject.org/ftp/BachJS/BWV1068/bach_air_bmv_1068/bach_air_bmv_1068.mid",
+  "bpm": 72.0,
+  "time_signature": "4/4",
+  "key": "D major",
+  "expected_notes_count": 108,
+  "duration_s": 26.332993197278913,
+  "measures_kept": 6,
+  "measures_total": 19,
+  "musicxml": "monofonni/bach_air_g_string/bach_air_g_string.musicxml",
+  "wav": "monofonni/bach_air_g_string/bach_air_g_string.wav",
+  "json_meta": "monofonni/bach_air_g_string/bach_air_g_string.json"
+}

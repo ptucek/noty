@@ -1,0 +1,19 @@
+{
+  "slug": "bach_chorale_aus_meines_herzens",
+  "category": "klavir",
+  "title": "Aus meines Herzens Grunde (Chorale 1)",
+  "composer": "J. S. Bach (1685–1750)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=378",
+  "mid_url": "https://www.mutopiaproject.org/ftp/BachJS/BWV269/bwv_269/bwv_269.mid",
+  "bpm": 72.0,
+  "time_signature": "3/4",
+  "key": "G major",
+  "expected_notes_count": 64,
+  "duration_s": 23.0,
+  "measures_kept": 8,
+  "measures_total": 21,
+  "musicxml": "klavir/bach_chorale_aus_meines_herzens/bach_chorale_aus_meines_herzens.musicxml",
+  "wav": "klavir/bach_chorale_aus_meines_herzens/bach_chorale_aus_meines_herzens.wav",
+  "json_meta": "klavir/bach_chorale_aus_meines_herzens/bach_chorale_aus_meines_herzens.json"
+}

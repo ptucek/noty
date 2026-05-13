@@ -1,0 +1,19 @@
+{
+  "slug": "winchester_new",
+  "category": "monofonni",
+  "title": "Winchester New",
+  "composer": "(Anonymous)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=197",
+  "mid_url": "https://www.mutopiaproject.org/ftp/Anonymous/WinchesterNew/WinchesterNew.mid",
+  "bpm": 100.0,
+  "time_signature": "4/4",
+  "key": "B- major",
+  "expected_notes_count": 116,
+  "duration_s": 22.198979591836736,
+  "measures_kept": 8,
+  "measures_total": 8,
+  "musicxml": "monofonni/winchester_new/winchester_new.musicxml",
+  "wav": "monofonni/winchester_new/winchester_new.wav",
+  "json_meta": "monofonni/winchester_new/winchester_new.json"
+}

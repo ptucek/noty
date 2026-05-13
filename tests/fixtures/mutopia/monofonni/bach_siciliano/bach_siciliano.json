@@ -1,0 +1,19 @@
+{
+  "slug": "bach_siciliano",
+  "category": "monofonni",
+  "title": "Siciliano",
+  "composer": "J. S. Bach (1685–1750)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1535",
+  "mid_url": "https://www.mutopiaproject.org/ftp/BachJS/BWV1031/bach_siciliano_bmv_1031/bach_siciliano_bmv_1031.mid",
+  "bpm": 54.0,
+  "time_signature": "6/8",
+  "key": "G minor",
+  "expected_notes_count": 135,
+  "duration_s": 29.665986394557823,
+  "measures_kept": 8,
+  "measures_total": 33,
+  "musicxml": "monofonni/bach_siciliano/bach_siciliano.musicxml",
+  "wav": "monofonni/bach_siciliano/bach_siciliano.wav",
+  "json_meta": "monofonni/bach_siciliano/bach_siciliano.json"
+}

@@ -1,0 +1,26 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+.env
+gradio_cached_examples/
+flagged/
+*.log
+
+# Mutopia fixtures – velké WAV soubory se generují přes tests/fixtures/mutopia/download.py
+tests/fixtures/mutopia/**/*.wav
+tests/fixtures/mutopia/**/*.midi
+tests/fixtures/mutopia/**/*_source.midi
+
+# Open Goldberg real fixtures – velké audio i source soubory regeneruje tests/fixtures/real/download.py
+tests/fixtures/real/**/*.wav
+tests/fixtures/real/**/*.flac
+tests/fixtures/real/**/*.mp3
+tests/fixtures/real/**/*.mid
+tests/fixtures/real/**/*.midi
+tests/fixtures/real/_source/*.mscz
+tests/fixtures/real/_source/*.musicxml

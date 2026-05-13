@@ -1,0 +1,19 @@
+{
+  "slug": "bach_minuet_c_minor",
+  "category": "monofonni",
+  "title": "Minuet in C minor",
+  "composer": "J. S. Bach (1685–1750)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1613",
+  "mid_url": "https://www.mutopiaproject.org/ftp/BachJS/BWVAnh121/BWV-121/BWV-121.mid",
+  "bpm": 108.0,
+  "time_signature": "3/4",
+  "key": "C minor",
+  "expected_notes_count": 47,
+  "duration_s": 16.332993197278913,
+  "measures_kept": 8,
+  "measures_total": 24,
+  "musicxml": "monofonni/bach_minuet_c_minor/bach_minuet_c_minor.musicxml",
+  "wav": "monofonni/bach_minuet_c_minor/bach_minuet_c_minor.wav",
+  "json_meta": "monofonni/bach_minuet_c_minor/bach_minuet_c_minor.json"
+}

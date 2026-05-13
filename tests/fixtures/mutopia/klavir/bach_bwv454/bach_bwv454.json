@@ -1,0 +1,19 @@
+{
+  "slug": "bach_bwv454",
+  "category": "klavir",
+  "title": "Ermuntre dich, mein schwacher Geist",
+  "composer": "J. S. Bach (1685–1750)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=2106",
+  "mid_url": "https://www.mutopiaproject.org/ftp/BachJS/BWV454/bwv_454/bwv_454.mid",
+  "bpm": 70.0,
+  "time_signature": "3/4",
+  "key": "F major",
+  "expected_notes_count": 41,
+  "duration_s": 23.570997732426303,
+  "measures_kept": 8,
+  "measures_total": 23,
+  "musicxml": "klavir/bach_bwv454/bach_bwv454.musicxml",
+  "wav": "klavir/bach_bwv454/bach_bwv454.wav",
+  "json_meta": "klavir/bach_bwv454/bach_bwv454.json"
+}

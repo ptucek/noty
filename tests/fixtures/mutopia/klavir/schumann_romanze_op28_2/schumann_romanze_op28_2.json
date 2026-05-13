@@ -1,0 +1,19 @@
+{
+  "slug": "schumann_romanze_op28_2",
+  "category": "klavir",
+  "title": "Romanzen",
+  "composer": "R. Schumann (1810–1856)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=314",
+  "mid_url": "https://www.mutopiaproject.org/ftp/SchumannR/O28/romanze-op28-2/romanze-op28-2.mid",
+  "bpm": 50.0,
+  "time_signature": "6/8",
+  "key": "F# major",
+  "expected_notes_count": 189,
+  "duration_s": 31.8,
+  "measures_kept": 8,
+  "measures_total": 34,
+  "musicxml": "klavir/schumann_romanze_op28_2/schumann_romanze_op28_2.musicxml",
+  "wav": "klavir/schumann_romanze_op28_2/schumann_romanze_op28_2.wav",
+  "json_meta": "klavir/schumann_romanze_op28_2/schumann_romanze_op28_2.json"
+}

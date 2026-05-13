@@ -1,0 +1,19 @@
+{
+  "slug": "beethoven_prelude_woo55",
+  "category": "klavir",
+  "title": "Prelude Op. WoO 55",
+  "composer": "L. V. Beethoven (1770–1827)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=939",
+  "mid_url": "https://www.mutopiaproject.org/ftp/BeethovenLv/WoO55/prelude_WoO55/prelude_WoO55.mid",
+  "bpm": 98.0,
+  "time_signature": "3/2",
+  "key": "F minor",
+  "expected_notes_count": 76,
+  "duration_s": 21.36698412698413,
+  "measures_kept": 5,
+  "measures_total": 48,
+  "musicxml": "klavir/beethoven_prelude_woo55/beethoven_prelude_woo55.musicxml",
+  "wav": "klavir/beethoven_prelude_woo55/beethoven_prelude_woo55.wav",
+  "json_meta": "klavir/beethoven_prelude_woo55/beethoven_prelude_woo55.json"
+}

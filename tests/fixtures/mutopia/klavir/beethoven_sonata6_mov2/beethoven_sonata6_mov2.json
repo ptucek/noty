@@ -1,0 +1,19 @@
+{
+  "slug": "beethoven_sonata6_mov2",
+  "category": "klavir",
+  "title": "Sonata No. 6 (2nd Movement: Allegretto)",
+  "composer": "L. V. Beethoven (1770–1827)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=993",
+  "mid_url": "https://www.mutopiaproject.org/ftp/BeethovenLv/O10/lvb_sonate_10no2_2/lvb_sonate_10no2_2.mid",
+  "bpm": 178.0,
+  "time_signature": "3/4",
+  "key": "F minor",
+  "expected_notes_count": 49,
+  "duration_s": 11.088979591836734,
+  "measures_kept": 8,
+  "measures_total": 169,
+  "musicxml": "klavir/beethoven_sonata6_mov2/beethoven_sonata6_mov2.musicxml",
+  "wav": "klavir/beethoven_sonata6_mov2/beethoven_sonata6_mov2.wav",
+  "json_meta": "klavir/beethoven_sonata6_mov2/beethoven_sonata6_mov2.json"
+}

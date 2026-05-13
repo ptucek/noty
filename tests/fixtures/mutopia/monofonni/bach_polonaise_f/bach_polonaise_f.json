@@ -1,0 +1,19 @@
+{
+  "slug": "bach_polonaise_f",
+  "category": "monofonni",
+  "title": "Polonaise in F major",
+  "composer": "J. S. Bach (1685–1750)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1013",
+  "mid_url": "https://www.mutopiaproject.org/ftp/BachJS/BWV117a/BWV-117a/BWV-117a.mid",
+  "bpm": 60.0,
+  "time_signature": "3/4",
+  "key": "F major",
+  "expected_notes_count": 103,
+  "duration_s": 27.0,
+  "measures_kept": 8,
+  "measures_total": 16,
+  "musicxml": "monofonni/bach_polonaise_f/bach_polonaise_f.musicxml",
+  "wav": "monofonni/bach_polonaise_f/bach_polonaise_f.wav",
+  "json_meta": "monofonni/bach_polonaise_f/bach_polonaise_f.json"
+}

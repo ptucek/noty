@@ -1,0 +1,19 @@
+{
+  "slug": "bach_minuet_a_minor",
+  "category": "monofonni",
+  "title": "Minuet in A minor",
+  "composer": "J. S. Bach (1685–1750)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1612",
+  "mid_url": "https://www.mutopiaproject.org/ftp/BachJS/BWVAnh120/BWV-120/BWV-120.mid",
+  "bpm": 80.0,
+  "time_signature": "3/4",
+  "key": "A minor",
+  "expected_notes_count": 47,
+  "duration_s": 21.0,
+  "measures_kept": 8,
+  "measures_total": 29,
+  "musicxml": "monofonni/bach_minuet_a_minor/bach_minuet_a_minor.musicxml",
+  "wav": "monofonni/bach_minuet_a_minor/bach_minuet_a_minor.wav",
+  "json_meta": "monofonni/bach_minuet_a_minor/bach_minuet_a_minor.json"
+}

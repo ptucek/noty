@@ -1,0 +1,19 @@
+{
+  "slug": "mozart_fugue_kv154",
+  "category": "klavir",
+  "title": "Fugue in G Minor KV 154/385k",
+  "composer": "W. A. Mozart (1756–1791)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=425",
+  "mid_url": "https://www.mutopiaproject.org/ftp/MozartWA/KV154/k154/k154.mid",
+  "bpm": 110.00000000000001,
+  "time_signature": "4/4",
+  "key": "G minor",
+  "expected_notes_count": 56,
+  "duration_s": 20.453990929705217,
+  "measures_kept": 8,
+  "measures_total": 54,
+  "musicxml": "klavir/mozart_fugue_kv154/mozart_fugue_kv154.musicxml",
+  "wav": "klavir/mozart_fugue_kv154/mozart_fugue_kv154.wav",
+  "json_meta": "klavir/mozart_fugue_kv154/mozart_fugue_kv154.json"
+}

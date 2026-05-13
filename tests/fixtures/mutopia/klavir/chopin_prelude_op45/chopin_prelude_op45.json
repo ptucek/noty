@@ -1,0 +1,19 @@
+{
+  "slug": "chopin_prelude_op45",
+  "category": "klavir",
+  "title": "Prelude",
+  "composer": "F. F. Chopin (1810–1849)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1776",
+  "mid_url": "https://www.mutopiaproject.org/ftp/ChopinFF/O45/chopin_prelude_op45/chopin_prelude_op45.mid",
+  "bpm": 120.0,
+  "time_signature": "4/4",
+  "key": "C# minor",
+  "expected_notes_count": 56,
+  "duration_s": 19.0,
+  "measures_kept": 8,
+  "measures_total": 99,
+  "musicxml": "klavir/chopin_prelude_op45/chopin_prelude_op45.musicxml",
+  "wav": "klavir/chopin_prelude_op45/chopin_prelude_op45.wav",
+  "json_meta": "klavir/chopin_prelude_op45/chopin_prelude_op45.json"
+}

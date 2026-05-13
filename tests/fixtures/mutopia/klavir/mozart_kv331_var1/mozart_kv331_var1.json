@@ -1,0 +1,19 @@
+{
+  "slug": "mozart_kv331_var1",
+  "category": "klavir",
+  "title": "Sonate Opus KV 331 - Variation 1",
+  "composer": "W. A. Mozart (1756–1791)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=615",
+  "mid_url": "https://www.mutopiaproject.org/ftp/MozartWA/KV331/KV331_1_2_var1/KV331_1_2_var1.mid",
+  "bpm": 92.0,
+  "time_signature": "6/8",
+  "key": "A major",
+  "expected_notes_count": 118,
+  "duration_s": 18.651995464852607,
+  "measures_kept": 8,
+  "measures_total": 36,
+  "musicxml": "klavir/mozart_kv331_var1/mozart_kv331_var1.musicxml",
+  "wav": "klavir/mozart_kv331_var1/mozart_kv331_var1.wav",
+  "json_meta": "klavir/mozart_kv331_var1/mozart_kv331_var1.json"
+}

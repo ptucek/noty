@@ -1,0 +1,19 @@
+{
+  "slug": "chopin_prelude_op28_6",
+  "category": "klavir",
+  "title": "Prelude: Op. 28, No. 6",
+  "composer": "F. F. Chopin (1810–1849)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=469",
+  "mid_url": "https://www.mutopiaproject.org/ftp/ChopinFF/O28/Chop-28-6/Chop-28-6.mid",
+  "bpm": 45.0,
+  "time_signature": "3/4",
+  "key": "B minor",
+  "expected_notes_count": 73,
+  "duration_s": 23.0,
+  "measures_kept": 5,
+  "measures_total": 26,
+  "musicxml": "klavir/chopin_prelude_op28_6/chopin_prelude_op28_6.musicxml",
+  "wav": "klavir/chopin_prelude_op28_6/chopin_prelude_op28_6.wav",
+  "json_meta": "klavir/chopin_prelude_op28_6/chopin_prelude_op28_6.json"
+}

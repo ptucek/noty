@@ -1,0 +1,19 @@
+{
+  "slug": "chopin_prelude_op28_4_peters",
+  "category": "klavir",
+  "title": "Prelude: Op. 28, No. 4 (from Peters source)",
+  "composer": "F. F. Chopin (1810–1849)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=921",
+  "mid_url": "https://www.mutopiaproject.org/ftp/ChopinFF/O28/Chop-28-4a/Chop-28-4a.mid",
+  "bpm": 48.0,
+  "time_signature": "2/2",
+  "key": "E minor",
+  "expected_notes_count": 39,
+  "duration_s": 23.0,
+  "measures_kept": 4,
+  "measures_total": 26,
+  "musicxml": "klavir/chopin_prelude_op28_4_peters/chopin_prelude_op28_4_peters.musicxml",
+  "wav": "klavir/chopin_prelude_op28_4_peters/chopin_prelude_op28_4_peters.wav",
+  "json_meta": "klavir/chopin_prelude_op28_4_peters/chopin_prelude_op28_4_peters.json"
+}

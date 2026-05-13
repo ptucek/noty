@@ -1,0 +1,19 @@
+{
+  "slug": "old_100th",
+  "category": "monofonni",
+  "title": "Old 100th (original version)",
+  "composer": "(Anonymous)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=194",
+  "mid_url": "https://www.mutopiaproject.org/ftp/Anonymous/Old100-orig/Old100-orig.mid",
+  "bpm": 240.0,
+  "time_signature": "4/2",
+  "key": "G major",
+  "expected_notes_count": 76,
+  "duration_s": 27.0,
+  "measures_kept": 12,
+  "measures_total": 12,
+  "musicxml": "monofonni/old_100th/old_100th.musicxml",
+  "wav": "monofonni/old_100th/old_100th.wav",
+  "json_meta": "monofonni/old_100th/old_100th.json"
+}

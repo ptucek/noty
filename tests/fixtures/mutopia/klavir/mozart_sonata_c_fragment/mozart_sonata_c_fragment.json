@@ -1,0 +1,19 @@
+{
+  "slug": "mozart_sonata_c_fragment",
+  "category": "klavir",
+  "title": "Sonata in C major (fragment)",
+  "composer": "W. A. Mozart (1756–1791)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=241",
+  "mid_url": "https://www.mutopiaproject.org/ftp/MozartWA/K6deest/k6deest/k6deest.mid",
+  "bpm": 120.0,
+  "time_signature": "3/4",
+  "key": "C major",
+  "expected_notes_count": 93,
+  "duration_s": 15.0,
+  "measures_kept": 8,
+  "measures_total": 25,
+  "musicxml": "klavir/mozart_sonata_c_fragment/mozart_sonata_c_fragment.musicxml",
+  "wav": "klavir/mozart_sonata_c_fragment/mozart_sonata_c_fragment.wav",
+  "json_meta": "klavir/mozart_sonata_c_fragment/mozart_sonata_c_fragment.json"
+}

@@ -1,0 +1,19 @@
+{
+  "slug": "handel_gavotte_aylesford",
+  "category": "monofonni",
+  "title": "Gavotte",
+  "composer": "G. F. Handel (1685–1759)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=151",
+  "mid_url": "https://www.mutopiaproject.org/ftp/HandelGF/Aylesford/03-gavotte/03-gavotte.mid",
+  "bpm": 92.0,
+  "time_signature": "4/4",
+  "key": "D major",
+  "expected_notes_count": 77,
+  "duration_s": 23.868979591836734,
+  "measures_kept": 8,
+  "measures_total": 20,
+  "musicxml": "monofonni/handel_gavotte_aylesford/handel_gavotte_aylesford.musicxml",
+  "wav": "monofonni/handel_gavotte_aylesford/handel_gavotte_aylesford.wav",
+  "json_meta": "monofonni/handel_gavotte_aylesford/handel_gavotte_aylesford.json"
+}

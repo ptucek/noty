@@ -1,0 +1,19 @@
+{
+  "slug": "good_king_wenceslas",
+  "category": "monofonni",
+  "title": "Good King Wenceslas",
+  "composer": "(Anonymous)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=905",
+  "mid_url": "https://www.mutopiaproject.org/ftp/Anonymous/GoodKingWenceslas/GoodKingWenceslas.mid",
+  "bpm": 120.0,
+  "time_signature": "4/4",
+  "key": "A major",
+  "expected_notes_count": 78,
+  "duration_s": 27.0,
+  "measures_kept": 12,
+  "measures_total": 17,
+  "musicxml": "monofonni/good_king_wenceslas/good_king_wenceslas.musicxml",
+  "wav": "monofonni/good_king_wenceslas/good_king_wenceslas.wav",
+  "json_meta": "monofonni/good_king_wenceslas/good_king_wenceslas.json"
+}

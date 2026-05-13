@@ -1,0 +1,19 @@
+{
+  "slug": "mozart_kv331_tema",
+  "category": "klavir",
+  "title": "Sonate Opus KV 331 - Tema",
+  "composer": "W. A. Mozart (1756–1791)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=614",
+  "mid_url": "https://www.mutopiaproject.org/ftp/MozartWA/KV331/KV331_1_1_tema/KV331_1_1_tema.mid",
+  "bpm": 56.0,
+  "time_signature": "6/8",
+  "key": "A major",
+  "expected_notes_count": 70,
+  "duration_s": 28.713990929705215,
+  "measures_kept": 8,
+  "measures_total": 36,
+  "musicxml": "klavir/mozart_kv331_tema/mozart_kv331_tema.musicxml",
+  "wav": "klavir/mozart_kv331_tema/mozart_kv331_tema.wav",
+  "json_meta": "klavir/mozart_kv331_tema/mozart_kv331_tema.json"
+}

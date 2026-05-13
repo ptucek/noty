@@ -1,0 +1,19 @@
+{
+  "slug": "leoni_satb_excerpt",
+  "category": "monofonni",
+  "title": "Leoni",
+  "composer": "(Anonymous)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=525",
+  "mid_url": "https://www.mutopiaproject.org/ftp/Anonymous/Leoni/Leoni.mid",
+  "bpm": 120.0,
+  "time_signature": "4/4",
+  "key": "G major",
+  "expected_notes_count": 137,
+  "duration_s": 29.0,
+  "measures_kept": 12,
+  "measures_total": 16,
+  "musicxml": "monofonni/leoni_satb_excerpt/leoni_satb_excerpt.musicxml",
+  "wav": "monofonni/leoni_satb_excerpt/leoni_satb_excerpt.wav",
+  "json_meta": "monofonni/leoni_satb_excerpt/leoni_satb_excerpt.json"
+}

@@ -1,0 +1,19 @@
+{
+  "slug": "mozart_fugue_kv153",
+  "category": "klavir",
+  "title": "Fugue in E-flat Major KV 153/375f",
+  "composer": "W. A. Mozart (1756–1791)",
+  "license": "Public Domain",
+  "source_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=424",
+  "mid_url": "https://www.mutopiaproject.org/ftp/MozartWA/KV153/k153/k153.mid",
+  "bpm": 110.00000000000001,
+  "time_signature": "4/4",
+  "key": "E- major",
+  "expected_notes_count": 80,
+  "duration_s": 20.453990929705217,
+  "measures_kept": 8,
+  "measures_total": 67,
+  "musicxml": "klavir/mozart_fugue_kv153/mozart_fugue_kv153.musicxml",
+  "wav": "klavir/mozart_fugue_kv153/mozart_fugue_kv153.wav",
+  "json_meta": "klavir/mozart_fugue_kv153/mozart_fugue_kv153.json"
+}
