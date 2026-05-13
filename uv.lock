@@ -1253,18 +1253,6 @@ wheels = [
 ]
 
 [[package]]
-name = "madmom"
-version = "0.16.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "cython" },
-    { name = "mido" },
-    { name = "numpy" },
-    { name = "scipy" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/c7/a3/9f3de3e8068a3606331134d96b84c8db4f7624d6715be8ab3c1f56e6731d/madmom-0.16.1.tar.gz", hash = "sha256:64a86a29106e7c4e0c5f4ec96801c2d1a8492db710e4fe27e097da5517d68cb2", size = 20040947, upload-time = "2018-11-14T14:56:22.83Z" }
-
-[[package]]
 name = "markdown"
 version = "3.10.2"
 source = { registry = "https://pypi.org/simple" }
@@ -1522,7 +1510,6 @@ dependencies = [
     { name = "demucs" },
     { name = "gradio" },
     { name = "librosa" },
-    { name = "madmom" },
     { name = "music21" },
     { name = "numpy" },
     { name = "pydantic" },
@@ -1546,7 +1533,6 @@ requires-dist = [
     { name = "demucs", specifier = ">=4.0.1" },
     { name = "gradio", specifier = ">=5.0,<7" },
     { name = "librosa", specifier = ">=0.10.2" },
-    { name = "madmom", specifier = ">=0.16.1" },
     { name = "music21", specifier = ">=9.1" },
     { name = "numpy", specifier = ">=1.26,<2.0" },
     { name = "pydantic", specifier = ">=2.13.4" },

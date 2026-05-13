@@ -27,7 +27,7 @@ tests/fixtures/real/_source/*.musicxml
 
 # Terraform
 infra/.terraform/
-infra/.terraform.lock.hcl
+# .terraform.lock.hcl je COMMITTED — pin providers across team/CI (Terraform best practice)
 infra/terraform.tfvars
 infra/*.tfstate
 infra/*.tfstate.backup

@@ -177,23 +177,6 @@ def _insert_key_signature(score: stream.Score, sharps: int) -> None:
             part.insert(0, m21key.KeySignature(sharps))
 
 
-def _apply_detected_key(score: stream.Score) -> None:
-    """Detekuje tóninu přes music21.analyze('key') a vloží KeySignature do první takt každé osnovy."""
-    try:
-        detected = score.analyze("key")
-        sharps = detected.sharps
-        logger.info("Detekovaná tonalita: %s (%d křížků)", detected, sharps)
-        ks = m21key.KeySignature(sharps)
-        for part in score.parts:
-            measures = list(part.getElementsByClass(stream.Measure))
-            if measures:
-                measures[0].insert(0, m21key.KeySignature(sharps))
-            else:
-                part.insert(0, ks)
-    except Exception as exc:
-        logger.warning("Key detection selhala: %s — bez předznamenání", exc)
-
-
 def _snap(value: float, grid: float) -> float:
     return round(value / grid) * grid
 
@@ -201,15 +184,3 @@ def _snap(value: float, grid: float) -> float:
 def _round_ql(ql: float) -> float:
     snapped = round(ql / 0.25) * 0.25
     return max(0.25, snapped)
-
-
-def _dedup_overlapping(events: list[NoteEvent]) -> list[NoteEvent]:
-    if not events:
-        return events
-    out = [events[0]]
-    for ev in events[1:]:
-        last = out[-1]
-        if abs(ev.start_s - last.start_s) < 0.02 and ev.pitch_midi == last.pitch_midi:
-            continue
-        out.append(ev)
-    return out

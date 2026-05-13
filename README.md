@@ -20,8 +20,8 @@ k vytištění / další úpravě.
 - 🎯 **Pokročilý override**: pokud znáš tempo / tóninu / takt, zadej je ručně
   (auto-detekce není dokonalá)
 - 🤖 **Volitelný LLM cleanup** přes Claude API (Anthropic nebo Microsoft Foundry)
-- 📚 **Galerie ukázek** — 47 syntetických + 8 reálných (Bach Goldberg Variations, CC0)
-  s referenčním notovým zápisem pro porovnání
+- 📚 **Galerie ukázek** — 4 ručně psané + 43 Mutopia (MuseScore render) + 8 reálných
+  (Bach Goldberg Variations, Kimiko Ishizaka, CC0) s referenčním notovým zápisem
 
 ---
 
@@ -117,17 +117,21 @@ Plný popis: [docs/CONFIGURATION.md](docs/CONFIGURATION.md).
 
 ## Test data + přesnost (čestně)
 
-47 syntetických fixtur (MuseScore-rendered audio) + 8 reálných (Open Goldberg, Kimiko Ishizaka, CC0).
+**4 ručně psané** + **43 Mutopia** (rendered audio z public-domain MusicXML) +
+**8 reálných** (Open Goldberg, Kimiko Ishizaka, CC0).
 
 | Metrika | Baseline | S LLM cleanup |
 |---|---|---|
-| Pitch class shoda (LCS) | ~51 % > 70 % threshold | podobné |
-| Time signature accuracy | **51.2 %** (43 Mutopia) | **34.9 %** (LLM zhoršuje) |
-| Tempo (rough) | typicky ±10 % od GT | LLM občas pomůže |
+| Pitch class shoda (LCS, threshold 70%) | **~50%** fixtur projde | podobné |
+| Time signature accuracy | **51.2%** (43 Mutopia) | **34.9%** (LLM zhoršuje, vypnuto) |
+| Tempo (rough) | typicky ±10% od GT, octave error častý | LLM občas pomůže |
 | Key signature | KS proxy, často chybí V↔I distinkce | podobné |
 
 **Octave error v tempu** je inherentní hudební ambiguity (Bach Aria 72 BPM nebo 144 BPM
 — bez kontextu nelze rozhodnout). Proto je v UI **manuální override**.
+
+Honestly: pitch detection funguje slušně, ale metadata (tempo/klíč/takt) jsou často
+špatně — proto je override doporučený když uživatel zná hodnoty.
 
 Detailní test data viz [tests/fixtures/README.md](tests/fixtures/README.md).
 

@@ -20,12 +20,8 @@ ROFORMER_MODEL_FILENAME = "model_bs_roformer_ep_317_sdr_12.9755.ckpt"
 Category = Literal["monofonni", "klavir", "kapela", "vokal"]
 CATEGORIES: tuple[Category, ...] = ("monofonni", "klavir", "kapela", "vokal")
 
-# Volitelný backend transkripce (env var ``TRANSCRIPTION_BACKEND``).
-# - ``basic_pitch`` (default): Spotify Basic Pitch, multi-instrument, CPU-friendly.
-# - ``aria_amt``: EleutherAI Aria-AMT (piano-only, SOTA na MAESTRO). Aktivuje se jen
-#   pro kategorii ``klavir``; pro ostatní kategorie fallback na Basic Pitch.
-_BACKEND_ENV = "TRANSCRIPTION_BACKEND"
-_DEFAULT_BACKEND = "basic_pitch"
+# Aktuálně používáme jen Basic Pitch. Aria-AMT / YourMT3+ scaffolding byl odstraněn
+# (CUDA-only, neintegrovatelné na CPU — viz docs/INITIAL_PLAN.md commit history).
 
 
 @dataclass(frozen=True)
@@ -54,9 +50,12 @@ def transcribe(
     Pro 'vokal' nejdřív Demucs/RoFormer vokál izolace.
     """
     output_dir.mkdir(parents=True, exist_ok=True)
-    tempo_detected, beat_times = _detect_tempo_and_beats(audio_path)
-    key_sharps_detected, key_mode, key_name, key_candidates = _detect_key_full(audio_path)
-    time_sig_detected, time_sig_contrasts = _detect_time_signature_full(audio_path)
+    # Načti audio ONCE — všechny 3 detektory (tempo/key/time-sig) sdílí stejný stream.
+    import librosa
+    y, sr = librosa.load(str(audio_path), sr=22050, mono=True)
+    tempo_detected, beat_times = _detect_tempo_and_beats(audio_path, y=y, sr=sr)
+    key_sharps_detected, key_mode, key_name, key_candidates = _detect_key_full(audio_path, y=y, sr=sr)
+    time_sig_detected, time_sig_contrasts = _detect_time_signature_full(audio_path, y=y, sr=sr)
 
     tempo_bpm = float(tempo_override) if tempo_override is not None else tempo_detected
     key_sharps = int(key_sharps_override) if key_sharps_override is not None else key_sharps_detected
@@ -70,7 +69,7 @@ def transcribe(
     if time_signature_override:
         logger.info("Time signature override: %s (auto detected %s)", time_sig, time_sig_detected)
     source = _isolate_vocals(audio_path, output_dir) if category == "vokal" else audio_path
-    events_raw = _run_transcription_backend(source, category)
+    events_raw = _basic_pitch_events(source)
     events = _clean_events(events_raw, category)
 
     extra_context = {
@@ -87,7 +86,7 @@ def transcribe(
             "filtered_out": len(events_raw) - len(events),
         },
         "backends": {
-            "transcription": os.environ.get(_BACKEND_ENV, _DEFAULT_BACKEND),
+            "transcription": "basic_pitch",
             "separation": os.environ.get("SEPARATION_BACKEND", "roformer") if category == "vokal" else "n/a",
         },
     }
@@ -123,24 +122,22 @@ def transcribe(
     )
 
 
-def _detect_tempo(audio_path: Path) -> float:
-    """Zpětně-kompatibilní wrapper. Vrací jen BPM."""
-    return _detect_tempo_and_beats(audio_path)[0]
-
-
-def _detect_tempo_and_beats(audio_path: Path) -> tuple[float, list[float]]:
+def _detect_tempo_and_beats(
+    audio_path: Path, y=None, sr: int | None = None
+) -> tuple[float, list[float]]:
     """Tempo detection s octave-aware corrections.
 
+    Pokud ``y`` a ``sr`` jsou předány, použijí se přímo (úspora — žádný re-load).
+    Jinak se audio načte z ``audio_path``.
+
     librosa.beat.beat_track občas vrátí 2× nebo 0.5× true tempo (octave error).
-    Multi-hypothesis: vezmi top kandidáty z librosa.beat.tempo(aggregate=None)
-    a vyber ten, který je v "klasickém" rozsahu 60-140 BPM. Pokud detekované tempo
-    je > 140 BPM a polovina je v [60, 140], halvuj.
+    Pokud detekované tempo je > 140 BPM a polovina je v [60, 140], halvuje.
     """
     import librosa
-    import numpy as np
 
     try:
-        y, sr = librosa.load(str(audio_path), sr=22050, mono=True)
+        if y is None or sr is None:
+            y, sr = librosa.load(str(audio_path), sr=22050, mono=True)
         onset_env = librosa.onset.onset_strength(y=y, sr=sr)
         tempo, beats = librosa.beat.beat_track(onset_envelope=onset_env, sr=sr)
         tempo_val = float(tempo) if hasattr(tempo, "__float__") else float(tempo[0])
@@ -185,21 +182,16 @@ _PITCH_NAMES = ("C", "C#", "D", "E♭", "E", "F", "F#", "G", "A♭", "A", "B♭"
 _MAJOR_SHARPS = {0: 0, 1: 7, 2: 2, 3: -3, 4: 4, 5: -1, 6: 6, 7: 1, 8: -4, 9: 3, 10: -2, 11: 5}
 
 
-def _detect_key(audio_path: Path) -> tuple[int, str, str]:
-    """Zpětně-kompatibilní wrapper. Vrací (sharps, mode, name)."""
-    sharps, mode, name, _ = _detect_key_full(audio_path)
-    return sharps, mode, name
-
-
 def _detect_key_full(
-    audio_path: Path,
+    audio_path: Path, y=None, sr: int | None = None,
 ) -> tuple[int, str, str, list[tuple[str, int, float]]]:
     """Krumhansl-Schmuckler. Vrátí (sharps, mode, name, top3_candidates)."""
     import librosa
     import numpy as np
 
     try:
-        y, sr = librosa.load(str(audio_path), sr=22050, mono=True)
+        if y is None or sr is None:
+            y, sr = librosa.load(str(audio_path), sr=22050, mono=True)
         chroma = librosa.feature.chroma_cqt(y=y, sr=sr)
         avg_chroma = chroma.mean(axis=1)
         if avg_chroma.sum() <= 0:
@@ -226,30 +218,6 @@ def _detect_key_full(
     except Exception as exc:
         logger.warning("Key detection selhala: %s, default C major", exc)
         return 0, "major", "C major", []
-
-
-def _run_transcription_backend(audio_path: Path, category: Category) -> list[NoteEvent]:
-    """Vybere transkripční backend podle env varu + kategorie.
-
-    - ``basic_pitch`` (default): vždy.
-    - ``aria_amt``: jen pro ``klavir``; jinde fallback na Basic Pitch (Aria je piano-only).
-      Když Aria-AMT selže (chybějící deps, CPU nefunguje, …), loguje warning a fallback.
-    """
-    backend = os.environ.get(_BACKEND_ENV, _DEFAULT_BACKEND).lower()
-    if backend == "aria_amt" and category == "klavir":
-        try:
-            from .aria_amt import aria_amt_events
-            logger.info("Aria-AMT backend pro kategorii %s", category)
-            return aria_amt_events(audio_path)
-        except Exception as exc:
-            logger.warning(
-                "Aria-AMT backend selhal (%s) – fallback na Basic Pitch", exc
-            )
-    elif backend == "aria_amt":
-        logger.info(
-            "Aria-AMT je piano-only; kategorie %s → fallback na Basic Pitch", category
-        )
-    return _basic_pitch_events(audio_path)
 
 
 def _basic_pitch_events(audio_path: Path) -> list[NoteEvent]:
@@ -428,12 +396,9 @@ def _suppress_octave_duplicates(events: list[NoteEvent]) -> list[NoteEvent]:
     return [e for e, k in zip(sorted_evs, keep) if k]
 
 
-def _detect_time_signature(audio_path: Path) -> str:
-    """Beat-aware: zachovává zpětnou kompatibilitu, jen vrací nejlepší takt."""
-    return _detect_time_signature_full(audio_path)[0]
-
-
-def _detect_time_signature_full(audio_path: Path) -> tuple[str, dict[str, float]]:
+def _detect_time_signature_full(
+    audio_path: Path, y=None, sr: int | None = None,
+) -> tuple[str, dict[str, float]]:
     """Vrátí (best_meter, all_contrasts_dict). Kandidáti: 2/4, 3/4, 4/4, 6/8.
 
     Contrast = downbeat_strength / mean(other_beat_strengths).
@@ -443,7 +408,8 @@ def _detect_time_signature_full(audio_path: Path) -> tuple[str, dict[str, float]
     import numpy as np
 
     try:
-        y, sr = librosa.load(str(audio_path), sr=22050, mono=True)
+        if y is None or sr is None:
+            y, sr = librosa.load(str(audio_path), sr=22050, mono=True)
         onset_env = librosa.onset.onset_strength(y=y, sr=sr)
         _, beats = librosa.beat.beat_track(onset_envelope=onset_env, sr=sr)
         if len(beats) < 8:

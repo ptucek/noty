@@ -17,7 +17,6 @@ dependencies = [
     "anthropic>=0.101.0",
     "pydantic>=2.13.4",
     "azure-identity>=1.25.3",
-    "madmom>=0.16.1",
 ]
 
 [project.optional-dependencies]
@@ -39,6 +38,3 @@ target-version = "py311"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-
-[tool.uv.extra-build-dependencies]
-madmom = ["cython", "numpy"]

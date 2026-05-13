@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+import atexit
 import base64
 import json
 import logging
+import shutil
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
@@ -225,9 +227,26 @@ def run_pipeline(
 
     category = LABEL_TO_CATEGORY[category_label]
     audio_path = Path(audio_input)
+
+    # DoS prevence: omezit délku vstupu.
+    try:
+        import soundfile as sf
+        info = sf.info(str(audio_path))
+        duration = info.frames / info.samplerate
+        if duration > 120:
+            raise gr.Error(f"Audio příliš dlouhé ({duration:.0f}s). Maximum 120s.")
+    except gr.Error:
+        raise
+    except Exception as exc:
+        logger.warning("Audio info read failed: %s — pokračuji", exc)
+
     logger.info("=== Start pipeline: %s (kategorie: %s) ===", audio_path.name, category)
 
     workdir = Path(tempfile.mkdtemp(prefix="noty_"))
+    # Workdir cleanup po skončení procesu (Gradio drží file paths v request queue,
+    # takže nemůžeme mazat hned). Pro long-running container Apps to znamená,
+    # že disk se naplní jen pokud běží bez restartu dlouho.
+    atexit.register(lambda d=workdir: shutil.rmtree(d, ignore_errors=True))
     logger.info("Workdir: %s", workdir)
 
     key_override = KEY_OPTIONS.get(key_label) if key_label != "Auto-detekce" else None
@@ -291,7 +310,7 @@ def _build_transcribe_tab(fixtures: list[FixtureExample]) -> None:
             audio = gr.Audio(
                 sources=["upload", "microphone"],
                 type="filepath",
-                label="Audio vstup",
+                label="Audio vstup (max 2 min)",
             )
             category = gr.Radio(
                 choices=list(CATEGORY_LABELS.values()),
@@ -401,6 +420,9 @@ def _build_examples_tab(fixtures: list[FixtureExample]) -> None:
 
 def main() -> None:
     demo = build_ui()
+    # Single concurrency — 2 GiB container + paralelní velké tensory (Basic Pitch, RoFormer)
+    # = OOM. Queue serializuje requesty.
+    demo.queue(default_concurrency_limit=1, max_size=10)
     demo.launch(server_name="0.0.0.0", server_port=7860)
 
 
