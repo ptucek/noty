@@ -1,0 +1,98 @@
+name: Build + Deploy noty
+
+# CI/CD pipeline:
+# - PR proti main:    terraform plan + image build (test), žádný apply
+# - push do main:     image build → ACR push → terraform apply (rolling deploy)
+#
+# Auth do Azure: OIDC federated identity (žádné secrety se neukládají do GitHubu).
+# Před prvním runem nakonfiguruj OIDC v Azure (viz docs/TERRAFORM.md).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Globální permissions pro OIDC token (potřebné pro azure/login)
+permissions:
+  id-token: write    # pro OIDC token request
+  contents: read     # pro git checkout
+  pull-requests: write # pro PR komentáře s plan output
+
+env:
+  AZURE_SUBSCRIPTION_ID: d96e1291-0b9a-4f15-a392-a63136aabcae
+  AZURE_TENANT_ID: 47e2c60d-2942-4060-a899-7e3a71c2a67d
+  RESOURCE_GROUP: ptuc-foundry
+  ACR_NAME: ca9a82ed6179acr
+  IMAGE_NAME: noty-app
+  TF_WORKING_DIR: infra
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Azure Login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}     # uloženo v GH secrets
+          tenant-id: ${{ env.AZURE_TENANT_ID }}
+          subscription-id: ${{ env.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Login to ACR
+        run: az acr login --name ${{ env.ACR_NAME }}
+
+      - name: Image tag (git SHA pro reprodukovatelnost)
+        id: tag
+        run: echo "tag=${GITHUB_SHA::8}" >> $GITHUB_OUTPUT
+
+      - name: Build + push image (jen na push do main; PR jenom plan)
+        if: github.event_name == 'push'
+        run: |
+          IMAGE="${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.tag }}"
+          docker build --platform linux/amd64 -t $IMAGE -t ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:latest .
+          docker push $IMAGE
+          docker push ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:latest
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ~1.9
+
+      - name: Terraform Init
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        run: terraform init
+
+      - name: Terraform Plan (PR + push)
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        id: plan
+        env:
+          TF_VAR_image_tag: ${{ steps.tag.outputs.tag }}
+          TF_VAR_foundry_api_key: ${{ secrets.FOUNDRY_API_KEY }}
+        run: terraform plan -no-color -out=tfplan
+
+      - name: Comment Plan on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const output = `### Terraform Plan
+            \`\`\`
+            ${{ steps.plan.outputs.stdout }}
+            \`\`\``;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
+
+      - name: Terraform Apply (jen na push do main)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        env:
+          TF_VAR_image_tag: ${{ steps.tag.outputs.tag }}
+          TF_VAR_foundry_api_key: ${{ secrets.FOUNDRY_API_KEY }}
+        run: terraform apply -auto-approve tfplan

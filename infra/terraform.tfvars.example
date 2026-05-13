@@ -1,0 +1,20 @@
+# Kopíruj na terraform.tfvars (gitignored) a vyplň hodnoty.
+# foundry_api_key dej radši přes env: export TF_VAR_foundry_api_key=...
+
+# subscription_id     = "d96e1291-0b9a-4f15-a392-a63136aabcae"
+# resource_group_name = "ptuc-foundry"
+# app_name            = "noty-app"
+# image_tag           = "latest"
+# foundry_resource_name = "ptuc-foundry-test"
+
+# Volba 1: API key (jednodušší)
+# foundry_api_key = "<paste-from-foundry-portal>"
+# use_managed_identity_for_foundry = false
+
+# Volba 2: Managed Identity (production-ready, žádný secret v TF state)
+# use_managed_identity_for_foundry = true
+
+# llm_cleanup_enabled = true
+# cleanup_model       = "claude-opus-4-7"
+
+# custom_hostname = "noty.davidtucek.cz"

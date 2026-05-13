@@ -24,3 +24,12 @@ tests/fixtures/real/**/*.mid
 tests/fixtures/real/**/*.midi
 tests/fixtures/real/_source/*.mscz
 tests/fixtures/real/_source/*.musicxml
+
+# Terraform
+infra/.terraform/
+infra/.terraform.lock.hcl
+infra/terraform.tfvars
+infra/*.tfstate
+infra/*.tfstate.backup
+infra/tfplan
+*.tfplan
